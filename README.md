@@ -1,6 +1,6 @@
 # metrics_stats
 
-simple push metrics stats to influxdb with udp .
+Simple push metrics stats to influxdb with udp, push once a second by default.
 
 ![](stats.jpg)
 
@@ -17,6 +17,20 @@ func main() {
         Tags: []string{"api"},
     }
     stat.Init(conf)
+
+	go func(){
+		for {
+			time.Sleep(1 * time.Second)
+			stats.Add("db.err", 1)
+		}
+	}()
+
+	go func(){
+		for {
+			time.Sleep(1 * time.Second)
+			stats.AddPermanent("insert.qps", 1)
+		}
+	}()
 
     select{}
 }
