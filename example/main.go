@@ -1,12 +1,3 @@
-# metrics_stats
-
-Simple push metrics stats to influxdb with udp, push once a second by default.
-
-![](stats.jpg)
-
-## Usage
-
-```
 package main
 
 import (
@@ -38,4 +29,3 @@ func main() {
 
 	select {}
 }
-```
